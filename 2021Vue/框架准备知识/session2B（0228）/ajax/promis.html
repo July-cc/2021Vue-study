@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // 封装
+    // let promiseFun = () => {
+    //   return new Promise(function (resolve, reject) {
+    //     console.log("异步操作执行中")
+    //     let a = 10
+    //     setTimeout(() => {
+    //       // 异步完成
+    //       a++
+    //       if (a > 10) {
+    //         console.log("异步操作执行成功")
+    //         resolve("成功啦")
+    //       } else {
+    //         console.log("异步操作执行失败")
+    //         reject("出错啦")
+    //       }
+    //     }, 1000)
+    //   })
+    // }
+    // promiseFun()
+    //   .then((res) => {
+    //     console.log("异步执行完毕之后，执行其他的操作")
+    //     console.log(res)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+
+    // 使用 promise 封装一下原生 ajax get 请求
+    // getPosts 就是一个原生的 get 请求方法
+    // let getPosts = url =>  new Promise ((resolve,reject) => {
+    //         let xhr = new XMLHttpRequest()
+    //         xhr.open('GET',url)
+    //         xhr.send()
+    //         // onreadystatechange 是属于监听请求的整个过程， onload 是属于监听请求是否成功
+    //         xhr.onload = () => {
+    //             if(xhr.readyState === 4 && xhr.status === 200){
+    //                 // 请求成功
+    //                 resolve(JSON.parse(xhr.responseText))
+    //             }else{
+    //                 reject('出错啦');
+    //             }
+    //         }
+    //     })
+    // getPosts('http://localhost:3008/posts').then(res => {
+    //     console.log(res);
+    // }).catch(err => {
+    //     console.log(err);
+    // })
+
+    // 先请求第一个文章数据，请求成功之后再请求第二个文章数据，然后再请求第三个文章数据
+    let getPosts = (url) =>
+      new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest()
+        xhr.open("GET", url)
+        xhr.send()
+        // pending 状态 异步进行中
+        xhr.onload = () => {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // fulfilled 状态 异步结束 已成功了
+            resolve(JSON.parse(xhr.responseText))
+          } else {
+            // rejected 状态 已失败了
+            reject("出错啦")
+          }
+        }
+      })
+    // .then .catch 两个方法是属于 promise 构造函数原型下的方法
+    // 正确的都可以请求到数据，错误的则会从 catch 下一个 then 方法请求到数据
+    // getPosts("http://localhost:3008/posts/1")
+    //   .then((res) => {
+    //     console.log(res)
+    //     // then 方法内的函数如果设置返回新的 promise 实例的话，那么就相当于给 then 方法设置了返回值
+    //     return getPosts("http://localhost:3008/posts/2")
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //     // catch 方法也会默认返回一个新的 promise 实例，这个新的 promise 实例内部什么都没有，会自动向下执行 then 方法
+    //   })
+    //   .then((res) => {
+    //     console.log(res)
+    //     return getPosts("http://localhost:3008/posts/3")
+    //   })
+    //   .then((res) => {
+    //     console.log(res)
+    //   })
+
+    // .finally() 方法 请求结束之后执行的
+    // getPosts("http://localhost:3008/posts/1")
+    //   .then((res) => {
+    //     console.log(res)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    //   .finally(() => {
+    //     console.log("请求结束之后执行的")
+    //   })
+
+    // Promise.all  方法  并发 promise
+    let allP = Promise.all([
+      getPosts("http:localhost:3008/posts/1"),
+      getPosts("http:localhost:3008/posts/2"),
+      getPosts("http:localhost:3008/posts/3"),
+    ])
+    allP.then((res) => {
+      // 全部成功，获取到的是所有 resolve 函数的参数集合
+      console.log(res)
+    })
+  </script>
+</html>

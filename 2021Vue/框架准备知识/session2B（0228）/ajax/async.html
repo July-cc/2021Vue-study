@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script>
+    // Generator 函数的语法糖 async 函数 异步的解决方案
+    // const getPosts = () => {
+    //   axios.get("ttp:localhost:3008/posts/1").then((res) => {
+    //     console.log(res.data)
+    //   })
+    // }
+
+    // async function x(){
+
+    // }
+
+    // 第一种写法
+    // const getPosts = async () => {
+    //   const res = await axios.get("http:localhost:3008/posts/1")
+    //     console.log(res.data);
+    // }
+    // getPosts()
+    
+    // 第二种写法
+    // const getPosts = async () => {
+    //   const res = await axios.get("http:localhost:3008/posts/1")
+    //   // res 就会得到成功的返回值，并且 await 之后的操作都必须在 await 后面的异步执行完毕之后再执行
+    //   //   console.log(res.data);
+    //   return res.data
+    // }
+    // // async函数返回一个 Promise 对象。
+    // // async函数内部return语句返回的值，会成为then方法回调函数的参数。
+    // getPosts().then((res) => {
+    //   console.log(res)
+    // })
+    
+    // 错误处理
+    const getPosts = async () => {
+      const res = await axios.get("http:localhost:3008/p22osts/1")
+      return res.data
+    }
+    getPosts().then((res) => {
+      console.log(res)
+    }).catch(err => {
+        // 捕获失败
+        console.log(err);
+    })
+  </script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+    .grid {
+      width: 600px;
+      height: 400px;
+      border: 1px solid red;
+    }
+    .grid-item {
+      background-color: teal;
+      width: 35%;
+      height: 100px;
+      float: left;
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+  </style>
+  <body>
+    <div class="grid">
+      <div class="grid-item a all">1</div>
+      <div class="grid-item b all">2</div>
+      <div class="grid-item c all">3</div>
+      <div class="grid-item a all">4</div>
+      <div class="grid-item b all">5</div>
+      <div class="grid-item c all">6</div>
+    </div>
+    <button class="fila">筛选a</button>
+    <button class="filb">筛选b</button>
+    <button class="filc">筛选c</button>
+    <button class="filall">全部</button>
+  </body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./js/isotope.js"></script>
+  <script>
+    let $grid = $(".grid");
+    $grid.isotope({
+      // options
+      itemSelector: ".grid-item",
+      layoutMode: "fitRows",
+    });
+    $(".fila").click(function () {
+      $grid.isotope({ filter: ".a" });
+    });
+    $(".filb").click(function () {
+      $grid.isotope({ filter: ".b" });
+    });
+    $(".filc").click(function () {
+      $grid.isotope({ filter: ".c" });
+    });
+    $(".filall").click(function () {
+      $grid.isotope({ filter: ".all" });
+    });
+  </script>
+</html>

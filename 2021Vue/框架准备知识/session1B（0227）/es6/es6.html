@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // const a = 0
+      // const a = 10
+      // console.log(a)
+
+      // var a = 1;
+      // window.a // 1
+
+      // let b = 1;
+      // console.log(window.b) // undefined
+
+      // let arr = [131, 182, 156]
+      // let num1 = arr[0]
+      // let num2 = arr[1]
+      // let num3 = arr[2]
+      // let [num1, num2,num3] = arr
+      // console.log(num1)
+      // console.log(num2)
+      // console.log(num3)
+
+      // let obj = {
+      //   username: '小黑',
+      //   userage: 20,
+      //   sex: '女'
+      // }
+      // // let age
+      // // let username
+      // // let sex
+      // // // 可以换名可以设置默认值
+      // // ({ userage: age, username, sex = '男' } = obj)
+
+      // // 可以换名可以设置默认值
+      // let { userage: age, username, sex = '男' } = obj
+      // console.log(username, age, sex)
+
+      // let str = 'hello'
+      // let [a,b,c,d,e] = str
+      // console.log(a)
+      // console.log(b)
+      // console.log(c)
+      // console.log(d)
+      // console.log(e)
+
+      // var obj = {
+      //   username: '大白'
+      // }
+      // function say({ username }) {
+      //   // let {username} = obj
+      //   const str = '我叫' + username
+      //   console.log(str)
+      // }
+      // say(obj)
+
+      // let goods = {
+      //   goodsName: 'iphone12',
+      //   price: 10000
+      // }
+      // // let htmlStr = '<div><h4>' + goods.goodsName + '</h4><span>' + goods.price + '</span></div>'
+      // let htmlStr = `<div class='goods'><h4>${goods.goodsName}</h4><span>${goods.price}</span></div>`
+      // console.log(htmlStr)
+
+      // let str = 'hello'
+      // let newStr = str.padEnd(8, 'a')
+      // console.log(str)
+      // console.log(newStr)
+
+      // let arr = [1, 2, [3, 4, [5, 6, [7, 8]]]]
+      // console.log(arr.flat())
+      // console.log(arr.flat(2))
+      // console.log(arr.flat(Infinity))
+
+      // let arr1 = [1, 2]
+      // let newArr1 = arr1.map(function (ele) {
+      //   return [ele, ele*2]
+      // })
+      // [[1, 2], [2, 4]]
+      // console.log(newArr1)
+      // let newArr1 = arr1.flatMap(function(ele){
+      //   return [ele, ele*2]
+      // })
+      // console.log(newArr1)
+
+      // let arr2 = [1,2,3]
+      // 原来的被修改了
+      // console.log(arr2.fill(''))
+      // console.log(arr2.fill(7, 1, 2))
+
+      // let name = '大白'
+      // let age = 10
+      // let obj1 = {
+      //   // 创建对象的时候如果属性值所代表的变量名和属性名相同的话可省略
+      //   name,
+      //   age,
+      //   say () {
+      //     console.log(this.name)
+      //   }
+      // }
+      // console.log(obj1)
+
+      // let arr = [1, 2, 3, 4, 5]
+      // let arr1 = [...arr]
+      // arr1.push(6)
+      // console.log(arr)
+      // console.log(arr1)
+      // console.log(arr1 === arr)
+      // 控制台分别输出什么
+
+      // let obj = {
+      //   a: 10,
+      //   b: 20
+      // }
+      // let obj1 = {...obj}
+      // obj1.a = 100
+      // console.log(obj)
+      // console.log(obj1)
+
+      // let goodsArr = [
+      //   {
+      //     name: '手机',
+      //     price: 1000,
+      //     id: 1
+      //   },
+      //   {
+      //     name: '平板',
+      //     price: 2000,
+      //     id: 2
+      //   },
+      //   {
+      //     name: '笔记本',
+      //     price: 3000,
+      //     id: 3
+      //   }
+      // ]
+      // let newArr = [...goodsArr]
+      // newArr[1].price = 2500
+      // console.log(newArr[1])
+      // console.log(goodsArr[1])
+
+      // let obj = {
+      //   a: 10,
+      //   a: 20
+      // }
+      // console.log(typeof obj)
+
+      // let s1 = Symbol('foo');
+      // let s2 = Symbol('foo');
+      // console.log(s1)
+      // console.log(s1.description)
+      // console.log('hello')
+
+      // let x = Symbol();
+
+      // let obj = {};
+      // let a = 'say'
+      // obj[a] = function(){
+
+      // }
+      // obj[x] = 'Hello!';
+      // console.log(obj)
+
+      // let arr = [1, 2, 3]
+      // let arr1 = new Array(1, 2, 3)
+      // console.log(arr === arr1)
+      // console.log(arr1)
+
+      // let re = /^[0-9]{9}$/
+      // let re1 = new RegExp('^[0-9]{9}$')
+      // console.log(re)
+      // console.log(re1)
+
+      // const s = new Set();
+      // set 内部不允许出现重复的成员
+      // add 是 set 数据结构的一个方法，该方法的作用是向内部添加新的成员
+      // size 属性返回set的个数
+      // delete 方法
+      // has 方法
+      // clear 方法
+      // forEach 方法
+      // [2, 3, 5, 4, 5, 2, 2].forEach(function(ele){
+      //   s.add(ele)
+      // });
+
+      // console.log(s)
+
+      // let newS = new Set([1, 2, 3, 4, 1])
+      // console.log(newS.size)
+      // 应用
+      // 数组去重
+      // let arr = [1, 23, 1, 412, 31, 23, 457, 5, 42, 2, 2, 2, 2, 2]
+      // console.log([...new Set(arr)])
+
+      // function Point(x, y) {
+      //   this.x = x;
+      //   this.y = y;
+      // }
+
+      // Point.prototype.toString = function () {
+      //   return `(${this.x},${this.y})`;
+      // };
+
+      // var p = new Point(1, 2);
+      // console.log(p)
+      // console.log(p.toString())
+      // let _color = 'red'
+      // class Point {
+      //   // 类的内部默认只能写方法
+      //   // 类的内部必须存在 constructor 函数,当 new 的时候 constructor 函数被触发，该方法默认返回实例对象(this)
+      //   // 除了 constructor 函数之外的函数都相当于公有方法
+      //   z = 50
+      //   constructor(x, y){
+      //     this.x = x
+      //     this.y = y
+      //     // this.z = 50
+      //     console.log('constructor 函数执行了')
+      //   }
+      //   // get 给 color 属性定义初始值
+      //   get color (){
+      //     return _color
+      //   }
+      //   // set 给 color 属性设置值，该函数会在修改 color 属性的时候触发
+      //   set color (new_value){
+      //     _color = new_value
+      //   }
+      //   toString(){
+      //     return `(${this.x},${this.y})`
+      //   }
+      //   // 静态方法
+      //   // 只有类本身可以访问，不会生成到类的实例上,只能通过类访问
+      //   static sayHello (){
+      //     console.log('hello')
+      //   }
+      // }
+      // Point.prototype.say = function(){
+      //   console.log('我是坐标')
+      // }
+      // let p = new Point(1, 2)
+      // p.color = 'xxxx'
+      // console.log(p)
+      // console.log(p.toString())
+      // Point.sayHello()
+
+      // class Point {
+      //   constructor(x, y) {
+      //     this.x = x
+      //     this.y = y
+      //   }
+      //   sayPoint() {
+      //     console.log(`我是坐标(${this.x},${this.y})`)
+      //   }
+      // }
+      // // let p = new Point(100,20)
+      // // console.log(p)
+      // // p.sayPoint()
+
+      // // 类的继承是用关键字 extends
+      // class ColorPoint extends Point {
+      //   // 需要继承 Point 内的所有内容
+      //   constructor(x, y, color) {
+      //     // 当继承的类内部创建了 constructor 函数，那么该函数内部必须是使用 super 方法调用父类
+      //     super(x, y)
+      //     this.color = color
+      //   }
+      // }
+      // let colorP = new ColorPoint(100, 200, 'red')
+      // console.log(colorP)
+      // colorP.sayPoint()
+
+      // function add(x, y = 20) {
+      //   return x + y
+      // }
+      // let res = add(2)
+      // console.log(res)
+
+      // function fun(a, ...rest) {
+      //   // rest 叫剩余参数
+      //   console.log(rest)
+      // }
+      // fun(1, 2, 3, 4)
+
+      // 函数的新写法 箭头函数
+      // 箭头函数没有 function 不能是用 function 创建只能存储到变量中
+      // let add = (x, y = 20) => x + y
+      // let res = add(10)
+      // console.log(res)
+      // 箭头函数分为箭头左右和右侧
+      // 左侧是参数部分 默认使用 () 包裹，当只有一个参数的时候可以省略 () 直接写参数
+      // 右侧是执行部分 默认使用 {} 包裹, 当函数右侧只有返回值的时候可以省略 {} 直接写返回值也不需要 return。
+      // 当函数只返回对象的时候可以直接 ({})
+
+      // 箭头函数的普通函数的 this 指向问题
+      // 普通函数的this指向 谁调用的就指向谁
+      // 箭头函数的 this 创建的时候就定义好了
+      // let obj = {
+      //   a: 10,
+      //   fun: function(){
+      //     console.log(this)
+      //   }
+      // }
+      // let obj = {
+      //   a: 10,
+      //   fun: () => {
+      //     console.log(this)
+      //   }
+      // }
+      // obj.fun()
+      // let fun1 = obj.fun
+      // fun1()
+      // 对象内定义方法的时候如果方法内部使用了 this 那么这个方法不能使用 箭头函数定义
+
+      // class Point {
+      //   constructor(x, y) {
+      //     this.x = x
+      //     this.y = y
+      //   }
+      //   sayPoint = () => {
+      //     console.log(`我是坐标(${this.x},${this.y})`)
+      //   }
+      // }
+      // let p = new Point(10, 100)
+      // p.sayPoint()
+
+      // let arr = [1, 3124, 145, 123, 1225, 6, 7]
+      // let newArr = arr.filter(function (ele) {
+      //   return ele < 10
+      // })
+      // let newArr = arr.filter(ele => ele < 10)
+      // console.log(newArr)
+
+      // import { firstName } from './js/es6.js';
+      // console.log(firstName)
+      // function add(...values) {
+      //   let sum = 0;
+      //   for (var val of values) {
+      //     sum += val;
+      //   }
+      //   return sum;
+      // }
+      // console.log(add(2, 5, 3)); // 10
+    </script>
+  </body>
+</html>
