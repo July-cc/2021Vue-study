@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// 每个组件都是一个模块
 // vue 组件都可以默认导入
 import App from './App.vue'
 

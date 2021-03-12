@@ -43,4 +43,12 @@
 
 - App.vue 组件是项目最大的组件，因为只有 App 组件会被渲染到页面上的 #app 中
 
+
+##### 如何划分组件
+
 ##### 组件的嵌套
+- 父组件导入需要展示的子组件
+```js
+import Header from "./components/Headder"
+```
+- 在父组件中的 script 标签内的导出对象下，使用 components 属性，进行子组件注册
