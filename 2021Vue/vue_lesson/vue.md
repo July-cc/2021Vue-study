@@ -203,6 +203,7 @@ src 属性经过指令包裹之后引号内可以直接写 js v-bind: 可以简�
 #### 事件处理
 
 - 定义事件
+  在 VUE 里面的 methods 定义方法的时候，如果方法内需要使用 this 那么必须将该方法定义成普通函数，不能写成箭头函数，因为 this 指向问题
 
 ```js
 // 事件处理函数
@@ -221,8 +222,138 @@ src 属性经过指令包裹之后引号内可以直接写 js v-bind: 可以简�
 ```
 
 - 绑定事件
+
 ```html
-  <!-- 使用 v-on: 指令绑定事件,可以简写成 @ -->
-  <button v-on:click="add">+</button>
-  <button @click="sub">-</button>
+<!-- 使用 v-on: 指令绑定事件,可以简写成 @ -->
+<button v-on:click="add">+</button>
+<button @click="sub">-</button>
+```
+
+- 事件传参
+
+```html
+<!-- 事件传参方法 事件绑定的时候直接传递即可-->
+<!-- 事件函数内获取事件对象,如果绑定函数没有传递额外的参数,那么事件的第一个参数默认就会是 事件对象(event) -->
+<!-- 如果绑定函数的时候传递的参数,那么事件内想要使用事件对象的话,绑定的时候用 $event 当做实参传递使用 -->
+<li
+  :class="{ active: activeIndex === num - 1 }"
+  @click="changeActiveIndex(num - 1,$event)"
+  v-for="num in imgArr.length"
+  :key="num"
+></li>
+```
+
+```js
+changeActiveIndex(index,e){
+    console.log(e);
+        this.activeIndex = index
+    }
+```
+
+- 使用事件对象
+- 事件简写
+
+#### data prop method ......的使用(在 template script 标签中)
+
+- template 直接使用,只需要遵循模板语法即可
+- script 标签中使用 this.xxx xxx 表示对应的名字
+
+#### vue 中 class 与 style 的绑定
+
+1.class 的绑定
+
+- 普通的 JS 语法实现
+
+```html
+<div :class="show ? 'box' : 'box hide'"></div>
+```
+
+- 对象语法
+
+```html
+<div :class="{ box: true, hide: !show }"></div>
+```
+
+- 数组语法
+
+```html
+<div :class="['box', show ? '' : 'hide']"></div>
+```
+
+- 数组语法嵌套对象语法
+
+```html
+<div :class="['box', { hide: !show }]"></div>
+<div :class="['box', { changecolor: !active }]"></div>
+<div :class="['box', { hide: !show,changecolor:!active }]"></div>
+```
+
+2.style 的绑定
+
+- 普通的 JS 语法实现
+
+```html
+<div
+  :style="`background-color:${active ? 'red':'orange'};`"
+  :class="['box',{ hide: !show }]"
+></div>
+```
+
+- 对象语法
+
+```html
+<div class="box" :style="{ backgroundColor: active ? 'red' : 'blue' }"></div>
+```
+
+- 数组语法 就是可以使用多个对象语法 [{对象语法},{对象语法}]
+
+```html
+<div class="box" :style="[{ backgroundColor: active ? 'red' : 'blue' }]"></div>
+```
+
+3.指令 v-show 实现 只是可以实现出现或消失 添加或者删除 display:none
+
+```html
+<div class="box" v-show="show"></div>
+```
+
+#### 条件渲染
+
+- v-show 只是可以实现出现或消失 添加或者删除 display:none
+- v-if 真正的删除了结构
+- v-else 必须和 if 同时使用并且是兄弟关系,结构上下紧挨着
+- v-else-if 不常用
+
+#### 列表渲染
+
+- v-for
+
+```html
+<!-- 列表渲染   就是将数组数据渲染到页面上-->
+<div class="keywords">
+  <!-- 要根据数据渲染多个 keyword -->
+  <!-- v-for 的使用 word in keywords -->
+  <!-- keyWords 是自定义的变量名，代表数组内的项，称之为循环的参数还可以有 index 参数，就需要写成 (word,index) -->
+  <!-- keywords 是数据数组 -->
+  <!-- 使用 v-for 的时候必须添加 key 属性,而且 key 属性的属性值必须是在兄弟之间唯一的 -->
+  <div class="keyword" v-for="(word, index) in keyWords" :key="index">
+    <span>{{ index > 8 ? `${index + 1}` : `0${index + 1}` }}</span>
+    <h4>{{ word }}</h4>
+  </div>
+  <!-- 其他的数据 v-for -->
+  <div v-for="num in 4" :key="`0${num}`">{{num}}</div>
+  <!-- 在兄弟之间 key 的值必须是唯一的要不就会报错-->
+  <div v-for="(str,index) in hello" :key="index">{{str}}</div>
+  <!-- 不在同一级里 key 的值就无所谓了-->
+  <div v-for="(str,index) in 'hello'" :key="index">{{str}}</div>
+
+  <!-- 在 tenplate 标签上使用 v-for 可以渲染包含多个元素的内容 -->
+  <!-- key 是不可以添加在 template 标签上的，必须加在里面元素内,而且最外层的每一个都要添加,还要唯一 -->
+  <ul>
+    <template v-for="item in list">
+      <li :key="item.id">{{item.id}}</li>
+      <li :key="item.text">{{item.text}}</li>
+    </template>
+  </ul>
+</div>
 ```
