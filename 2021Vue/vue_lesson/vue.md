@@ -357,3 +357,74 @@ changeActiveIndex(index,e){
   </ul>
 </div>
 ```
+
+#### vue 实例生命周期钩子(组件的生命周期钩子)
+
+<img src="https://cn.vuejs.org/images/lifecycle.png">
+从组件开始渲染到销毁，不同的生命周期阶段对应着组件内的不同生命周期函数，在对应阶段对对应的函数会自动触发，所有的生命周期都是同步函数（同步阻塞，异步非阻塞）
+
+- 初始渲染阶段
+  - beforeCreate
+  ```js
+  beforeCreate () {
+  // 数据观测（data observer）和 event/watcher 事件配置之前被调用
+  console.log('我是组件的初始阶段生命周期 beforeCreate');
+  },
+  ```
+  - created
+  ```js
+   created () {
+  // data 设置完成,可以修改了
+  // 可以执行修改 data 的操作,也就是以后的异步请求修改数据可以在此生命周期执行
+  console.log('我是组件的初始阶段生命周期 created');
+  },
+  ```
+  - beforeMount
+  ```js
+  beforeMount () {
+  // 挂载之前,组件的 render 函数首次执行
+  console.log('我是组件的初始阶段生命周期 beforeMount');
+  },
+  ```
+  - mounted
+  ```js
+  mounted () {
+  // 组件完全渲染到了页面中
+  // 可以获取真实的 dom 节点了
+  console.log('我是组件的初始阶段生命周期 mounted');
+  },
+  ```
+- 数据更新渲染(data prop...发生改变)
+  - beforeUpdate
+  ```js
+  beforeUpdate () {
+    // 数据更新时
+    console.log('我是组件的更新阶段生命周期 beforeUpdate');
+  },
+  ```
+  - updated
+  ```js
+  updated () {
+    // 数据更新完毕，页面更新也完毕了
+    // 可以获取更新之后的 data 以及真实 dom 节点
+    console.log('我是组件的更新阶段生命周期 updated');
+  },
+  ```
+- 销毁(触发组件的销毁,可以用 v-if 条件渲染)
+  - beforeDestroy
+  ```js
+  beforeDestroy () {
+    // 实例销毁之前调用，在这一步，实力仍然完全可用
+    console.log('我是组件的销毁阶段生命周期 beforeDestroy');
+  },
+  ```
+  - destroyed
+  ```js
+  destroyed () {
+    // 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
+    console.log('我是组件的销毁阶段生命周期 destroyed');
+  },
+  ```
+#### 组件之间的交互
+- 父子组件之间
+  - 父组件想要修改组件的 data 将子组建的 data 定义到父组件中，然后将其当做 prop 传递给子组件

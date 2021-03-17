@@ -1,5 +1,5 @@
 <template>
-  <div class="banner">
+  <div class="banner" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <h2>轮播图</h2>
     <img
       :class="{ active: activeIndex === index }"
@@ -8,8 +8,8 @@
       :src="img.imgSrc"
       alt=""
     />
-    <div class="left-arrow" @click="leftarrow">⬅︎</div>
-    <div class="right-arrow" @click="rightarrow">➤</div>
+    <div class="left-arrow" @click="leftArrow">⬅︎</div>
+    <div class="right-arrow" @click="rightArrow">➤</div>
     <div class="pagination">
       <li
         :class="{ active: activeIndex === num - 1 }"
@@ -60,7 +60,7 @@ export default {
     };
   },
   methods: {
-    leftarrow() {
+    leftArrow() {
       //   if (this.activeIndex < 1) {
       //     this.activeIndex = this.imgArr.length - 1;
       //   } else {
@@ -74,7 +74,7 @@ export default {
         this.activeIndex = imgArr.length - 1;
       }
     },
-    rightarrow() {
+    rightArrow() {
       //   if (this.activeIndex > this.imgArr.length - 2) {
       //     this.activeIndex = 0;
       //   } else {
@@ -87,13 +87,65 @@ export default {
         this.activeIndex++;
       }
     },
-    changeActiveIndex(index) {
-      this.activeIndex = index;
+    onMouseEnter() {
+      clearInterval(this.run);
     },
+    onMouseLeave() {
+      this.run = setInterval(() => {
+        this.rightArrow();
+      }, 1000);
+    },
+    // changeActiveIndex(index) {
+    //   this.activeIndex = index;
+    // },
     // changeActiveIndex(index,e){
     // console.log(e);
     //     this.activeIndex = index
     // }
+  },
+  beforeCreate() {
+    // 数据观测（data observer）和 event/watcher 事件配置之前被调用
+    // console.log('我是组件的初始阶段生命周期 beforeCreate');
+  },
+  created() {
+    // data 设置完成,可以修改了
+    // 可以执行修改 data 的操作,也就是以后的异步请求修改数据可以在此生命周期执行
+    // console.log('我是组件的初始阶段生命周期 created');
+    // 在组件的 script 标签内嵌套的函数内，想要使用 this （组件本身）需要将函数定义成箭头函数
+    // 想要定义一个组件内的全局变量,又不想弄成 data ,可以直接使用 this.xxx 定义
+    this.run = setInterval(() => {
+      this.rightArrow();
+    }, 1000);
+  },
+  beforeMount() {
+    // 挂载之前,组件的 render 函数首次执行
+    // console.log('我是组件的初始阶段生命周期 beforeMount');
+  },
+  mounted() {
+    // 组件完全渲染到了页面中
+    // 可以获取真实的 dom 节点了
+    // console.log('我是组件的初始阶段生命周期 mounted');
+  },
+  beforeUpdate() {
+    // 数据更新时
+    // console.log('我是组件的更新阶段生命周期 beforeUpdate');
+  },
+  updated() {
+    // 数据更新完毕，页面更新也完毕了
+    // 可以获取更新之后的 data 以及真实 dom 节点
+    // console.log('我是组件的更新阶段生命周期 updated');
+  },
+  // 触发组件的销毁,可以用 v-if 条件渲染
+  beforeDestroy() {
+    // 实例销毁之前调用，在这一步，实力仍然完全可用
+    // console.log('我是组件的销毁阶段生命周期 beforeDestroy');
+    clearInterval(this.run)
+    // 清除计时器
+    // 清除 windows 的滚动条事件
+  },
+  destroyed() {
+    // 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
+    // console.log('我是组件的销毁阶段生命周期 destroyed');
   },
 };
 </script>
@@ -111,6 +163,7 @@ export default {
   top: 0;
   left: 0;
   opacity: 0;
+  transition: opacity 1s;
 }
 .banner img.active {
   z-index: 1;
